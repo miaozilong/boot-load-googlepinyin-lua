@@ -1,39 +1,27 @@
 name: Build and Release AHK EXE
-
-on:
-  push:
-    branches:
-      - main  # 或你希望触发的分支名
-
-jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - name: 检出代码
-        uses: actions/checkout@v4
-
-      - name: 设置 AutoHotkey 环境
-        uses: grufo77/AutoHotkey-Action@v1.0
-        with:
-          script-path: GooglePinyin2LoadLua.ahk  # 替换为你自己的 AHK 文件名
-          output-path: dist/GooglePinyin2LoadLua.exe
-          version: "v2"
-
-      - name: 获取当前 Git 提交哈希
-        id: git_info
-        run: |
-          $hash = git rev-parse --short=8 HEAD
-          echo "::set-output name=commit_hash::$hash"
-
-      - name: 打标签（格式：build-<commit-hash>）
-        run: |
-          git tag build-${{ steps.git_info.outputs.commit_hash }}
-          git push origin build-${{ steps.git_info.outputs.commit_hash }}
-
-      - name: 创建或更新 Release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: build-${{ steps.git_info.outputs.commit_hash }}
-          allowOverwrite: true
-          artifacts: dist/*.exe
+# 这文件有点问题  以后有空再说
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  example:
+#    name: Example
+#    runs-on: windows-latest
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v2
+#
+#      - name: Compile with Ahk2Exe
+#        uses: cennis91/action-ahk2exe@main
+#        id: ahk2exe
+#        with:
+#          in: GooglePinyin2LoadLua.ahk
+#          out: GooglePinyin2LoadLua.exe
+#
+#      - name: Upload Artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: compiled-binary
+#          path: ${{ steps.ahk2exe.outputs.binary }}
