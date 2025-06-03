@@ -1,7 +1,7 @@
 ﻿#Requires AutoHotkey v2.0
 
-; 定义日志文件路径
-logFile := "E:\logfile.txt"  ; 修改为你想保存日志的路径
+; 定义日志文件路径为系统临时目录下的 logfile.txt
+logFile := A_Temp . "\logfile.txt"  ; 使用系统临时文件夹路径
 
 ; 写入日志函数
 Log(message) {
